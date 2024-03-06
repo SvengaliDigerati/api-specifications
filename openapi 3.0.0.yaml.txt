@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: SummarizeAndExtractKeyInfo API
+  description: This API summarizes provided texts and extracts key information.
+  version: 1.0.0
+servers:
+  - url: http://api.example.com/v1
+    description: Main API server for summarization and key info extraction
+paths:
+  /summarize:
+    post:
+      operationId: summarizeText
+      summary: Summarize text and extract key information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Text to be summarized and analyzed for key information.
+                extractEntities:
+                  type: boolean
+                  description: Whether to extract key entities such as dates and names.
+              required:
+                - text
+      responses:
+        '200':
+          description: A summary of the text and extracted key information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: string
+                    description: The summarized text.
+                  keyEntities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
